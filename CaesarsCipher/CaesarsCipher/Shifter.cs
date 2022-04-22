@@ -8,12 +8,13 @@
 
             foreach (var symbol in message)
             {
-                if (AlphabetRecord.Alphabet.Contains(symbol) is false)
+                if (AlphabetRecord.Alphabet.Contains(char.ToLower(symbol)) is false)
                 {
+                    shiftedMessage += symbol;
                     continue;
                 }
 
-                var currentIndex = AlphabetRecord.Alphabet.IndexOf(symbol);
+                var currentIndex = AlphabetRecord.Alphabet.IndexOf(char.ToLower(symbol));
                 var shiftedIndex = currentIndex + shift;
 
                 if (shiftedIndex > AlphabetRecord.Alphabet.Count)

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CaesarsCipher
+﻿namespace CaesarsCipher
 {
-    internal class Encrypter
+    public static class Encrypter
     {
+        public static string Encrypt(string cipher, string message)
+        {
+
+
+            return "";
+        }
     }
 }

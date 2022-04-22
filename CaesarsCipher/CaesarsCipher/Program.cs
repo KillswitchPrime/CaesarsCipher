@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using CaesarsCipher;
+using System.Text.RegularExpressions;
 
 Console.WriteLine("This program will encrypt and decrypt text using caesars cipher.");
 
@@ -6,7 +7,7 @@ string message;
 string cipher;
 int shift;
 
-Regex regex = new(@"([,.A-Åa-å])\\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+Regex regex = new(@"([\s,.A-Åa-å])\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 do
 {
@@ -18,9 +19,23 @@ do
 
 do
 {
-    Console.Write("Input cipher: ");
+    Console.Write("Input cipher (one word, no repeat characters): ");
 
     cipher = Console.ReadLine();
+
+    var noRepeats = true;
+    foreach(var symbol in cipher)
+    {
+        if(cipher.Count(s => s.Equals(symbol)) > 1)
+        {
+            noRepeats = false;
+        }
+    }
+
+    if(noRepeats is false)
+    {
+        cipher = "";
+    }
 
 } while (string.IsNullOrWhiteSpace(cipher) is true || regex.IsMatch(cipher) is false);
 
@@ -28,7 +43,7 @@ do
 {
     shift = -1;
     
-    Console.Write("Input cipher: ");
+    Console.Write("Input shift: ");
 
     var succesfullyParsed = int.TryParse(Console.ReadLine(), out var number);
 
@@ -39,3 +54,6 @@ do
 
 } while (shift < 0);
 
+var shiftedMessage = Shifter.EncryptionShift(shift, message);
+
+Console.WriteLine(shiftedMessage);
