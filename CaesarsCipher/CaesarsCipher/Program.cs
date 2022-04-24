@@ -14,10 +14,11 @@ do
     // TODO: Add logic for switching between encryption and decryption.
     Console.WriteLine("Input 'e' for encryption and 'd' for decryption: ");
     var selectedKey = Console.ReadKey();
+    Console.WriteLine();
 
     var keyChar = selectedKey.KeyChar;
 
-    if (keyChar != 'e' || keyChar != 'd') continue;
+    if (keyChar != 'e' && keyChar != 'd') continue;
 
     do
     {
@@ -66,25 +67,22 @@ do
 
     } while (shift < 0);
 
-
-    var shiftedMessage = "";
-    var codedMessage = "";
-
+    var completedMessage = "";
     if(keyChar == 'e')
     {
-        shiftedMessage = Shifter.EncryptionShift(shift, message);
+        var shiftedMessage = Shifter.EncryptionShift(shift, message);
 
-        codedMessage = Encrypter.Encrypt(cipher, shiftedMessage);
+        completedMessage = Encrypter.Encrypt(cipher, shiftedMessage);
     }
-    else
+    else if(keyChar == 'd')
     {
-        shiftedMessage = Shifter.DecryptionShift(shift, message);
+        var decryptedMessage = Encrypter.Decrypt(cipher, message);
 
-        codedMessage = Encrypter.Decrypt(cipher, shiftedMessage);
+        completedMessage = Shifter.DecryptionShift(shift, decryptedMessage);
     }
 
     Console.WriteLine();
-    Console.WriteLine(codedMessage);
+    Console.WriteLine(completedMessage);
     Console.WriteLine();
 
 } while (true);
