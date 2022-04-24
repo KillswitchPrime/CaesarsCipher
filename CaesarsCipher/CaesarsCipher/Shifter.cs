@@ -43,7 +43,7 @@
                 var currentIndex = AlphabetRecord.Alphabet.IndexOf(symbol);
                 var shiftedIndex = currentIndex - shift;
 
-                if (shiftedIndex < AlphabetRecord.Alphabet.Count)
+                if (shiftedIndex < 0)
                 {
                     shiftedIndex += AlphabetRecord.Alphabet.Count - 1;
                 }
