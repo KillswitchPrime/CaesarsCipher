@@ -12,7 +12,12 @@ Regex regex = new(@"([\s,.A-Åa-å])\w+", RegexOptions.Compiled | RegexOptions.I
 do
 {
     // TODO: Add logic for switching between encryption and decryption.
-    Console.WriteLine("Input 1 for encryption and 2 for decryption: ");
+    Console.WriteLine("Input 'e' for encryption and 'd' for decryption: ");
+    var selectedKey = Console.ReadKey();
+
+    var keyChar = selectedKey.KeyChar;
+
+    if (keyChar != 'e' || keyChar != 'd') continue;
 
     do
     {
@@ -61,9 +66,22 @@ do
 
     } while (shift < 0);
 
-    var shiftedMessage = Shifter.EncryptionShift(shift, message);
 
-    var codedMessage = Encrypter.Encrypt(cipher, shiftedMessage);
+    var shiftedMessage = "";
+    var codedMessage = "";
+
+    if(keyChar == 'e')
+    {
+        shiftedMessage = Shifter.EncryptionShift(shift, message);
+
+        codedMessage = Encrypter.Encrypt(cipher, shiftedMessage);
+    }
+    else
+    {
+        shiftedMessage = Shifter.DecryptionShift(shift, message);
+
+        codedMessage = Encrypter.Decrypt(cipher, shiftedMessage);
+    }
 
     Console.WriteLine();
     Console.WriteLine(codedMessage);
