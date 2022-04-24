@@ -29,21 +29,21 @@
 
             var cipherAlphabet = CreateCipherAlphabet(cipher);
 
-            var codedMessage = "";
+            var decodedMessage = "";
             foreach (var symbol in message.ToLower())
             {
                 if (AlphabetRecord.Alphabet.Contains(symbol) is false)
                 {
-                    codedMessage += symbol;
+                    decodedMessage += symbol;
                     continue;
                 }
 
                 var indexOfSymbol = cipherAlphabet.IndexOf(symbol);
 
-                codedMessage += AlphabetRecord.Alphabet[indexOfSymbol];
+                decodedMessage += AlphabetRecord.Alphabet[indexOfSymbol];
             }
 
-            return codedMessage;
+            return decodedMessage;
         }
 
         private static List<char> CreateCipherAlphabet(string cipher)
