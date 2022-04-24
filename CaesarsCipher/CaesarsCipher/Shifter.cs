@@ -6,15 +6,15 @@
         {
             var shiftedMessage = "";
 
-            foreach (var symbol in message)
+            foreach (var symbol in message.ToLower())
             {
-                if (AlphabetRecord.Alphabet.Contains(char.ToLower(symbol)) is false)
+                if (AlphabetRecord.Alphabet.Contains(symbol) is false)
                 {
                     shiftedMessage += symbol;
                     continue;
                 }
 
-                var currentIndex = AlphabetRecord.Alphabet.IndexOf(char.ToLower(symbol));
+                var currentIndex = AlphabetRecord.Alphabet.IndexOf(symbol);
                 var shiftedIndex = currentIndex + shift;
 
                 if (shiftedIndex > AlphabetRecord.Alphabet.Count)
@@ -23,7 +23,6 @@
                 }
 
                 shiftedMessage += AlphabetRecord.Alphabet[shiftedIndex];
-
             }
 
             return shiftedMessage.ToString();

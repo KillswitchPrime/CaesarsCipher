@@ -9,51 +9,56 @@ int shift;
 
 Regex regex = new(@"([\s,.A-Åa-å])\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-do
+while (true)
 {
-    Console.Write("Input message: ");
-
-    message = Console.ReadLine();
-
-} while (string.IsNullOrWhiteSpace(message) is true || regex.IsMatch(message) is false);
-
-do
-{
-    Console.Write("Input cipher (one word, no repeat characters): ");
-
-    cipher = Console.ReadLine();
-
-    var noRepeats = true;
-    foreach(var symbol in cipher)
+    do
     {
-        if(cipher.Count(s => s.Equals(symbol)) > 1)
+        Console.Write("Input message: ");
+
+        message = Console.ReadLine();
+
+    } while (string.IsNullOrWhiteSpace(message) is true || regex.IsMatch(message) is false);
+
+    do
+    {
+        Console.Write("Input cipher (one word, no repeat characters): ");
+
+        cipher = Console.ReadLine();
+
+        var noRepeats = true;
+        foreach (var symbol in cipher)
         {
-            noRepeats = false;
+            if (cipher.Count(s => s.Equals(symbol)) > 1)
+            {
+                noRepeats = false;
+            }
         }
-    }
 
-    if(noRepeats is false)
+        if (noRepeats is false)
+        {
+            cipher = "";
+        }
+
+    } while (string.IsNullOrWhiteSpace(cipher) is true || regex.IsMatch(cipher) is false);
+
+    do
     {
-        cipher = "";
-    }
+        shift = -1;
 
-} while (string.IsNullOrWhiteSpace(cipher) is true || regex.IsMatch(cipher) is false);
+        Console.Write("Input shift: ");
 
-do
-{
-    shift = -1;
-    
-    Console.Write("Input shift: ");
+        var input = Console.ReadLine();
 
-    var succesfullyParsed = int.TryParse(Console.ReadLine(), out var number);
+        var succesfullyParsed = int.TryParse(input, out var number);
 
-    if (succesfullyParsed) 
-    { 
-        shift = number; 
-    }
+        if (succesfullyParsed)
+        {
+            shift = number;
+        }
 
-} while (shift < 0);
+    } while (shift < 0);
 
-var shiftedMessage = Shifter.EncryptionShift(shift, message);
+    var shiftedMessage = Shifter.EncryptionShift(shift, message);
 
-Console.WriteLine(shiftedMessage);
+    Console.WriteLine(shiftedMessage);
+}
