@@ -9,8 +9,11 @@ int shift;
 
 Regex regex = new(@"([\s,.A-Åa-å])\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-while (true)
+do
 {
+    // TODO: Add logic for switching between encryption and decryption.
+    Console.WriteLine("Input 1 for encryption and 2 for decryption: ");
+
     do
     {
         Console.Write("Input message: ");
@@ -60,5 +63,10 @@ while (true)
 
     var shiftedMessage = Shifter.EncryptionShift(shift, message);
 
-    Console.WriteLine(shiftedMessage);
-}
+    var codedMessage = Encrypter.Encrypt(cipher, shiftedMessage);
+
+    Console.WriteLine();
+    Console.WriteLine(codedMessage);
+    Console.WriteLine();
+
+} while (true);
