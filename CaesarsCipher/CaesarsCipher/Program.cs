@@ -23,6 +23,8 @@ do
         langChar = langKey.KeyChar;
 
     } while (langChar != 'e' && langChar != 'n');
+
+    var languageEnum = langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO;
     
     // TODO: Add logic for switching between encryption and decryption.
     Console.WriteLine("Input 'e' for encryption and 'd' for decryption: ");
@@ -78,15 +80,15 @@ do
     var completedMessage = "";
     if(keyChar == 'e')
     {
-        var shiftedMessage = Shifter.EncryptionShift(shift, message, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
+        var shiftedMessage = Shifter.EncryptionShift(shift, message, languageEnum);
 
-        completedMessage = Encrypter.Encrypt(cipher, shiftedMessage, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
+        completedMessage = Encrypter.Encrypt(cipher, shiftedMessage, languageEnum);
     }
     else if(keyChar == 'd')
     {
-        var decryptedMessage = Encrypter.Decrypt(cipher, message, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
+        var decryptedMessage = Encrypter.Decrypt(cipher, message, languageEnum);
 
-        completedMessage = Shifter.DecryptionShift(shift, decryptedMessage, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
+        completedMessage = Shifter.DecryptionShift(shift, decryptedMessage, languageEnum);
     }
 
     Console.WriteLine();
