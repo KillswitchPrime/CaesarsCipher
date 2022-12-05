@@ -19,7 +19,7 @@
 
                 if (shiftedIndex >= AlphabetRecord.Alphabet[languageEnum].Count)
                 {
-                    shiftedIndex -= AlphabetRecord.Alphabet[languageEnum].Count - 1;
+                    shiftedIndex -= AlphabetRecord.Alphabet[languageEnum].Count;
                 }
 
                 shiftedMessage += AlphabetRecord.Alphabet[languageEnum][shiftedIndex];

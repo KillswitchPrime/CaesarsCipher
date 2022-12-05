@@ -9,8 +9,6 @@ int shift;
 
 Regex regex = new(@"([\s,.A-Åa-å])\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-
-
 do
 {
     char langChar;
