@@ -58,6 +58,9 @@ do
             }
         }
 
+        if (string.IsNullOrEmpty(cipher))
+            noRepeats = true;
+
     } while (noRepeats is false);
 
     do
