@@ -10,7 +10,7 @@ namespace CaesarsCipher.Test
         [InlineData(0, "test", "test")]
         public void EncryptionShift_Valid(int shift, string message, string expected)
         {
-            var shiftedMessage = Shifter.EncryptionShift(shift, message);
+            var shiftedMessage = Shifter.EncryptionShift(shift, message, LanguageEnum.EN);
 
             Assert.NotNull(shiftedMessage);
             Assert.NotEmpty(shiftedMessage);
@@ -24,7 +24,7 @@ namespace CaesarsCipher.Test
         [InlineData(0, "test", "test")]
         public void DecryptionShift_Valid(int shift, string message, string expected)
         {
-            var shiftedMessage = Shifter.DecryptionShift(shift, message);
+            var shiftedMessage = Shifter.DecryptionShift(shift, message, LanguageEnum.EN);
 
             Assert.NotNull(shiftedMessage);
             Assert.NotEmpty(shiftedMessage);

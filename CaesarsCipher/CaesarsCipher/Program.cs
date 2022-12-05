@@ -9,8 +9,21 @@ int shift;
 
 Regex regex = new(@"([\s,.A-Åa-å])\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+
+
 do
 {
+    char langChar;
+    do
+    {
+        Console.Write("Input language code (e = EN, n = NO): ");
+        var langKey = Console.ReadKey();
+        Console.WriteLine();
+
+        langChar = langKey.KeyChar;
+
+    } while (langChar != 'e' && langChar != 'n');
+    
     // TODO: Add logic for switching between encryption and decryption.
     Console.WriteLine("Input 'e' for encryption and 'd' for decryption: ");
     var selectedKey = Console.ReadKey();
@@ -26,15 +39,15 @@ do
 
         message = Console.ReadLine();
 
-    } while (string.IsNullOrWhiteSpace(message) is true || regex.IsMatch(message) is false);
+    } while (string.IsNullOrWhiteSpace(message) || regex.IsMatch(message) is false);
 
+    var noRepeats = true;
     do
     {
         Console.Write("Input cipher (one word, no repeat characters): ");
 
         cipher = Console.ReadLine();
-
-        var noRepeats = true;
+        
         foreach (var symbol in cipher)
         {
             if (cipher.Count(s => s.Equals(symbol)) > 1)
@@ -43,12 +56,7 @@ do
             }
         }
 
-        if (noRepeats is false)
-        {
-            cipher = "";
-        }
-
-    } while (string.IsNullOrWhiteSpace(cipher) is true || regex.IsMatch(cipher) is false);
+    } while (noRepeats is false);
 
     do
     {
@@ -70,15 +78,15 @@ do
     var completedMessage = "";
     if(keyChar == 'e')
     {
-        var shiftedMessage = Shifter.EncryptionShift(shift, message);
+        var shiftedMessage = Shifter.EncryptionShift(shift, message, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
 
-        completedMessage = Encrypter.Encrypt(cipher, shiftedMessage);
+        completedMessage = Encrypter.Encrypt(cipher, shiftedMessage, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
     }
     else if(keyChar == 'd')
     {
-        var decryptedMessage = Encrypter.Decrypt(cipher, message);
+        var decryptedMessage = Encrypter.Decrypt(cipher, message, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
 
-        completedMessage = Shifter.DecryptionShift(shift, decryptedMessage);
+        completedMessage = Shifter.DecryptionShift(shift, decryptedMessage, langChar == 'e' ? LanguageEnum.EN : LanguageEnum.NO);
     }
 
     Console.WriteLine();

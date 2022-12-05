@@ -11,7 +11,7 @@ namespace CaesarsCipher.Test
             var message = "message that should be shifted";
             var expected = "kesscae tbct sbmujh ie sbdrteh";
 
-            var shiftedMessage = Encrypter.Encrypt(cipher, message);
+            var shiftedMessage = Encrypter.Encrypt(cipher, message, LanguageEnum.EN);
 
             Assert.NotNull(shiftedMessage);
             Assert.NotEmpty(shiftedMessage);
@@ -26,7 +26,7 @@ namespace CaesarsCipher.Test
             var message = "kesscae tbct sbmujh ie sbdrteh";
             var expected = "message that should be shifted";
 
-            var shiftedMessage = Encrypter.Decrypt(cipher, message);
+            var shiftedMessage = Encrypter.Decrypt(cipher, message, LanguageEnum.EN);
 
             Assert.NotNull(shiftedMessage);
             Assert.NotEmpty(shiftedMessage);

@@ -2,56 +2,56 @@
 {
     public static class Shifter
     {
-        public static string EncryptionShift(int shift, string message)
+        public static string EncryptionShift(int shift, string message, LanguageEnum languageEnum)
         {
             var shiftedMessage = "";
 
             foreach (var symbol in message.ToLower())
             {
-                if (AlphabetRecord.Alphabet.Contains(symbol) is false)
+                if (AlphabetRecord.Alphabet[languageEnum].Contains(symbol) is false)
                 {
                     shiftedMessage += symbol;
                     continue;
                 }
 
-                var currentIndex = AlphabetRecord.Alphabet.IndexOf(symbol);
+                var currentIndex = AlphabetRecord.Alphabet[languageEnum].IndexOf(symbol);
                 var shiftedIndex = currentIndex + shift;
 
-                if (shiftedIndex > AlphabetRecord.Alphabet.Count)
+                if (shiftedIndex >= AlphabetRecord.Alphabet[languageEnum].Count)
                 {
-                    shiftedIndex -= AlphabetRecord.Alphabet.Count - 1;
+                    shiftedIndex -= AlphabetRecord.Alphabet[languageEnum].Count - 1;
                 }
 
-                shiftedMessage += AlphabetRecord.Alphabet[shiftedIndex];
+                shiftedMessage += AlphabetRecord.Alphabet[languageEnum][shiftedIndex];
             }
 
-            return shiftedMessage.ToString();
+            return shiftedMessage;
         }
 
-        public static string DecryptionShift(int shift, string message)
+        public static string DecryptionShift(int shift, string message, LanguageEnum languageEnum)
         {
             var shiftedMessage = "";
 
             foreach (var symbol in message.ToLower())
             {
-                if (AlphabetRecord.Alphabet.Contains(symbol) is false)
+                if (AlphabetRecord.Alphabet[languageEnum].Contains(symbol) is false)
                 {
                     shiftedMessage += symbol;
                     continue;
                 }
 
-                var currentIndex = AlphabetRecord.Alphabet.IndexOf(symbol);
+                var currentIndex = AlphabetRecord.Alphabet[languageEnum].IndexOf(symbol);
                 var shiftedIndex = currentIndex - shift;
 
                 if (shiftedIndex < 0)
                 {
-                    shiftedIndex += AlphabetRecord.Alphabet.Count - 1;
+                    shiftedIndex += AlphabetRecord.Alphabet[languageEnum].Count - 1;
                 }
 
-                shiftedMessage += AlphabetRecord.Alphabet[shiftedIndex];
+                shiftedMessage += AlphabetRecord.Alphabet[languageEnum][shiftedIndex];
             }
 
-            return shiftedMessage.ToString();
+            return shiftedMessage;
         }
     }
 }
